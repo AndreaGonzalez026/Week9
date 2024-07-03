@@ -5,23 +5,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    public float jumpForce;
+    public float gravityModifier;
+    public bool isOnGround = true;
+    
     // Start is called before the first frame update
     void Start()
     {
       playerRb =  GetComponent<Rigidbody>();
-      playerRb.AddForce(Vector3.up * 100); 
+      Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // This is where we get player input
-        horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
-
-        // Move the vehicle forward
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
-        // We turn the vehicle 
-        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+      if (Input.GetKeyDown(KeyCode.Space) && isOnGround) 
+      {
+      playerRb.AddForce(Verctor3.up * jumoForce, ForceMode.Impulse);
+      isOnGround = false;
+      }
     }
 }
