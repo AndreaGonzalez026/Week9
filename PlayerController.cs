@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Private Variables
-    private float speed = 5.0f;
-    private float turnSpeed = 25;
-    private float horizontalInput;
-    private float forwardInput;
-
+    private Rigidbody playerRb;
     // Start is called before the first frame update
     void Start()
     {
-        
+      playerRb =  GetComponent<Rigidbody>();
+      playerRb.AddForce(Vector3.up * 100); 
     }
 
     // Update is called once per frame
