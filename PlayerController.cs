@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private Animator playerAnim;
+    public ParticleSystem explosionParticle;
     public float jumpForce;
     public float gravityModifier;
     public bool isOnGround = true;
@@ -30,9 +31,8 @@ public class PlayerController : MonoBehaviour
       }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision other)
     {
-
     if(collision.gameObject.CompareTag("Ground"))
        {
         isOnGround = true;
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
           gameOver = true;
           playerAnim.SetBool("Death_b", true);
           playerAnim.SetInteger"DeathType_int", 1)
+          explosionParticle.Play();
        }
     }
 }
